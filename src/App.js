@@ -4,6 +4,7 @@ import Gallery from './components/Gallery'
 import SearchBar from './components/SearchBar'
 import AlbumView from './components/AlbumView'
 import ArtistView from './components/ArtistView'
+import { DataContext } from './context/DataContext'
 
 function App() {
 	let [search, setSearch] = useState('')
@@ -41,12 +42,14 @@ function App() {
 					<Route path="/" element={
 						<Fragment>
 							<SearchBar handleSearch = {handleSearch}/>
-							<Gallery data={data} />
-							</Fragment>
+							<DataContext.Provider value={data}>
+							<Gallery/>
+							</DataContext.Provider>
+						</Fragment>
 					} />
 					<Route path="/album/:id" element={<AlbumView />} />
 					<Route path="/artist/:id" element={<ArtistView />} />
-			</Routes>
+				</Routes>
 			</Router>
 		</div>
   	);
